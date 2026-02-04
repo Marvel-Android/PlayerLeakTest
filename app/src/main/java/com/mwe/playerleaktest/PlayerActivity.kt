@@ -31,7 +31,12 @@ class PlayerActivity : AppCompatActivity() {
             insets
         }
 
-        file = intent.getSerializableExtra("file", File::class.java)!!
+        file = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+             intent.getSerializableExtra("file", File::class.java)!!
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getSerializableExtra("file") as File
+        }
 
         playerView = findViewById(R.id.playerView)
     }

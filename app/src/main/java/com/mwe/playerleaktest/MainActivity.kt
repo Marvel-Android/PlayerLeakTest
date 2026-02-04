@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -31,6 +32,14 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.video).setOnClickListener {
             checkFile()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launch {
+            delay(2000)
+            findViewById<TextView>(R.id.video).performClick()
         }
     }
 
